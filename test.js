@@ -264,10 +264,10 @@ describe('Sorter', () => {
   });
 
   describe('sorts with custom comparator', () => {
-    const AGE_COMPARATOR = (left, right) => left.age - right.age;
-    const REVERSE_COMPARATOR = (left, right) => right - left;
-    const STRINGIFY_COMPARATOR = (left, right) => JSON.stringify(left, null, 2).length - JSON.stringify(right, null, 2).length;
-
+      const AGE_COMPARATOR = (left, right) => left.age - right.age;
+      const REVERSE_COMPARATOR = (left, right) => right - left;
+      const STRINGIFY_COMPARATOR = (left, right) => JSON.stringify(left, null, 2).length - JSON.stringify(right, null, 2).length;
+  
     describe('age comparator', () => {
       it('1', () => {
         sorter.add({ age: 20 });

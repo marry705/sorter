@@ -2,6 +2,7 @@ class Sorter {
   constructor() { //конструктор
     this._arr=[];
     this._len=0;
+    this._compareFunct = (left, right) => left - right;
   }
 
   add(element) { // добавление элемент
@@ -11,7 +12,7 @@ class Sorter {
 
   at(index) { //найти эл-т по индексу
       if (index<this._len && index>=0) {return this._arr[index];}
-      else {return "Еhere is no element with such index";}
+      else {return "There is no element with such index";}
   }
 
   get length() { // не проходит тест
@@ -29,7 +30,8 @@ class Sorter {
     }
     else {
       var m = indices.length;
-    	for (var i = 0; i < m-1; i++){ 
+      const FunctSort = (left, right) => left - right;
+      /*for (var i = 0; i < m-1; i++){ //сортировка входящего массива
         for (var j = 0; j < m-1-i; j++){
           if (indices[j+1] < indices[j]){
             var t = indices[j+1]; 
@@ -37,8 +39,8 @@ class Sorter {
             indices[j] = t; 
           }
         }
-      }  
-       //indices.sort();
+      } */ 
+      indices.sort(FunctSort); //сортировка входящего массива
       let boof = [];
       var n = this._len;
       for (var i = 0; i < n; i++){
@@ -46,16 +48,7 @@ class Sorter {
           if (i===indices[k]) {boof.push(this._arr[i]);}
         }
       }
-      m = boof.length;
-      for (var i = 0; i < m-1; i++){ 
-        for (var j = 0; j < m-1-i; j++){
-          if (boof[j+1] < boof[j]){
-            var t = boof[j+1]; 
-            boof[j+1] = boof[j]; 
-            boof[j] = t; 
-          }
-        }
-      }  
+      boof.sort(this._compareFunct); // сортировка буферного массива по функции  
       var j=0;
       m = indices.length;
 		  for (var i = 0; i < n; i++){
@@ -67,9 +60,9 @@ class Sorter {
   return this._arr;
   }
 
-  setComparator(compareFunction) {
-    // your implementation
-  }
+  setComparator(compareFunction = (left, right) => left - right) {
+    this._compareFunct = compareFunction;    
+  } 
 }
 
 module.exports = Sorter;
